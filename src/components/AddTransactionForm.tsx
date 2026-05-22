@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { type Transaction } from '../types/transaction';
 import { useTransactionStore } from '../store/transactionStore';
+import { categories } from '../constants/categories';
 
 export default function AddTransactionForm() {
 
@@ -20,15 +21,18 @@ export default function AddTransactionForm() {
                 <input className="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="name" {...register('name')} />
                 <input className="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                     placeholder='amount' type='number' {...register("amount", { valueAsNumber: true })} />
-                <select className="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" {...register("type")}>
-                    <option value="Food">Food</option>
-                    <option value="Utilities">Utilities</option>
-                    <option value="Entertainment">Entertainment</option>
-                    <option value="Investment">Investment</option>
-                    <option value="Freelance">Freelance</option>
-                    <option value="Health">Health</option>
-                    <option value="Housing">Housing</option>
-                    <option value="Job">Job</option>
+                <select
+                    className="w-full mt-1 p-2 border rounded-lg"
+                    {...register("category")}
+                >
+                    {categories.map((category) => (
+                        <option
+                            key={category.value}
+                            value={category.value}
+                        >
+                            {category.label}
+                        </option>
+                    ))}
                 </select>
                 <select className="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" {...register("type")}>
                     <option value="income">Income</option>
